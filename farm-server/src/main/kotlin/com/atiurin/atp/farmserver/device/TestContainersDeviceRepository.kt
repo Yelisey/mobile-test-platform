@@ -96,6 +96,7 @@ class TestContainersDeviceRepository @Autowired constructor(
         container.apply {
             log.info { "Start container $container" }
             withPrivilegedMode(true)
+            withNetworkMode("host")
             container.exposeAdbPort(farmConfig.getPortInRange())
             container.exposeGrpcPort(farmConfig.getPortInRange())
             start()
