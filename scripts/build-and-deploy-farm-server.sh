@@ -26,7 +26,9 @@ export FARM_MODE=local
 farm-server --max_amount 5 \
   --start_port 10000 \
   --end_port 11000 \
-  --keep_alive_devices 30=2 \
+  --keep_alive_devices 30=5 \
   --device_busy_timeout 3600 \
   --img 30=us-docker.pkg.dev/android-emulator-268719/images/30-google-x64:30.1.2 \
-  --emulator_params "-gpu host"
+  --emulator_params "-no-boot-anim -no-audio -partition-size 6144 -gpu swiftshader_indirect">
+
+
