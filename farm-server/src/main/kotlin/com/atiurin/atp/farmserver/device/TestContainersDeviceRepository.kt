@@ -52,7 +52,7 @@ class TestContainersDeviceRepository @Autowired constructor(
         containerMap[farmDevice.id] = farmDevice
         log.info { "Device ${farmDevice.id} is booting. Created container $containerInfo, " }
         val bootTimeout = farmConfig.get().creatingDeviceTimeoutSec
-        val isDeviceCreated = waitForWithDelay(timeoutMs = bootTimeout * 1000, intervalMs = 1000){
+        val isDeviceCreated = waitForWithDelay(timeoutMs = bootTimeout * 2000, intervalMs = 1000){
             isDeviceAlive(farmDevice.id)
         }
         val state = if (isDeviceCreated){
@@ -95,6 +95,7 @@ class TestContainersDeviceRepository @Autowired constructor(
 
     private fun startContainer(container: AndroidContainer<Nothing>) {
         container.apply {
+            getLogs()
             log.info { "Start container $container" }
             withPrivilegedMode(true)
             withStartupTimeout(Duration.ofMinutes(2))
