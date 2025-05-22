@@ -7,7 +7,7 @@ data class Config(
     var maxDeviceCreationBatchSize: Int = 10,
     var keepAliveDevicesMap: MutableMap<String, Int> = mutableMapOf(),
     var busyDeviceTimeoutSec: Long = 30 * 60,
-    var creatingDeviceTimeoutSec: Long = 5 * 60,
+    var creatingDeviceTimeoutSec: Long = 5 * 600,
     var isMock: Boolean = false,
     var startPort: Int = 0,
     var endPort: Int = 65534,
@@ -19,7 +19,7 @@ data class Config(
     var deviceNeedToCreateMonitorDelay: Long = 5_000L,
     var brokenDevicesMonitorDelay: Long = 30_000L,
     var androidContainerAdbPath: String = "/android/sdk/platform-tools",
-    var serverAliveTimeoutSec: Long = 30,
+    var serverAliveTimeoutSec: Long = 60,
     var emulatorParams: String? = null,
     var emulatorEnvironments: MutableMap<String, String> = mutableMapOf(),
 )

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Repository
 import org.testcontainers.utility.DockerImageName
+import java.time.Duration
 
 @Lazy
 @Repository
@@ -96,7 +97,7 @@ class TestContainersDeviceRepository @Autowired constructor(
         container.apply {
             log.info { "Start container $container" }
             withPrivilegedMode(true)
-            withNetworkMode("host")
+            withStartupTimeout(Duration.ofMinutes(2))
             container.exposeAdbPort(farmConfig.getPortInRange())
             container.exposeGrpcPort(farmConfig.getPortInRange())
             start()
