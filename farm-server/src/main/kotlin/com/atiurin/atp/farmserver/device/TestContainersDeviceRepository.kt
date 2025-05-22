@@ -95,7 +95,6 @@ class TestContainersDeviceRepository @Autowired constructor(
 
     private fun startContainer(container: AndroidContainer<Nothing>) {
         container.apply {
-            getLogs()
             log.info { "Start container $container" }
             withPrivilegedMode(true)
             withStartupTimeout(Duration.ofMinutes(2))

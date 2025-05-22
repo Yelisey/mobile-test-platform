@@ -45,7 +45,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
-    implementation("org.testcontainers:testcontainers:1.15.2")
+    implementation("org.testcontainers:testcontainers:1.21.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc:3.2.5")
     implementation("org.springframework.boot:spring-boot-starter-web:3.2.5")
