@@ -102,7 +102,6 @@ class TestContainersDeviceRepository @Autowired constructor(
             withStartupTimeout(Duration.ofMinutes(2))
             container.exposeAdbPort(farmConfig.getPortInRange())
             container.exposeGrpcPort(farmConfig.getPortInRange())
-            withStartupCheckStrategy(IndefiniteWaitOneShotStartupCheckStrategy())
             start()
         }
     }
