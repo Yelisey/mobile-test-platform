@@ -12,6 +12,3 @@ mv deploy/farm-cli-client-$APP_VERSION deploy/farm-cli-client
 
 # Add the farm-server binary directory to the system PATH
 export PATH=$PATH:$(pwd)/deploy/farm-cli-client/bin
-
-# Set FARM_MODE environment variable to "local"
-export FARM_MODE=local

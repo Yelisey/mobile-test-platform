@@ -13,9 +13,6 @@ mv deploy/farm-server-$APP_VERSION deploy/farm-server
 # Add the farm-server binary directory to the system PATH
 export PATH=$PATH:$(pwd)/deploy/farm-server/bin
 
-# Set FARM_MODE environment variable to "local"
-export FARM_MODE=local
-
 # Start the farm-server with specific configuration
 farm-server --max_amount 5 \
   --start_port 10000 \
