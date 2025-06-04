@@ -7,7 +7,7 @@ data class Config(
     var maxDeviceCreationBatchSize: Int = 10,
     var keepAliveDevicesMap: MutableMap<String, Int> = mutableMapOf(),
     var busyDeviceTimeoutSec: Long = 30 * 60,
-    var creatingDeviceTimeoutSec: Long = 5 * 60,
+    var creatingDeviceTimeoutSec: Long = 10 * 60,
     var isMock: Boolean = false,
     var startPort: Int = 0,
     var endPort: Int = 65534,
