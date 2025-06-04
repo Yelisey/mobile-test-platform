@@ -16,6 +16,6 @@ class DockerExecAdbBootAnimationCompletedCommand(
     )
 
     override suspend fun execute(): CliCommandResult {
-        return executor.execute("docker exec -i $containerId \"$adbContainerPath\" shell getprop init.svc.bootanim")
+        return executor.execute("docker exec -i $containerId \"$adbContainerPath\" shell ls sdcard/Android")
     }
 }
