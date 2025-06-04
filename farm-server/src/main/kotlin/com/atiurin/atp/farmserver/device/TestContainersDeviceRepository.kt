@@ -75,20 +75,46 @@ class TestContainersDeviceRepository @Autowired constructor(
     }
 
     override fun isDeviceAlive(deviceId: String): Boolean {
-        val container = containerMap[deviceId]?.container ?: return false
-        val sysBootCompleted = runBlocking {
-            DockerExecAdbBootCompletedCommand(
-                containerId = container.containerId,
-                adbContainerPath = "${farmConfig.get().androidContainerAdbPath}/adb"
-            ).execute()
+        // Получаем FarmDevice, а из него уже containerId, если он там есть, или сам контейнер.
+        // В вашем текущем коде isDeviceAlive вы берете container.containerId.
+        // Предположим, что FarmDevice.container это объект AndroidContainer, у которого есть containerId
+        val deviceFromMap = containerMap[deviceId]
+        val containerId = deviceFromMap?.container?.containerId ?: run {
+            // Если у вас containerId хранится в другом месте в FarmDevice, используйте его.
+            // Например, если FarmDevice.containerInfo.containerId существует, или если
+            // сам deviceFromMap.container является строкой containerId.
+            // В вашем оригинальном isDeviceAlive было containerMap[deviceId]?.container?.containerId
+            // что предполагает, что `containerMap[deviceId]?.container` - это объект, имеющий `containerId`.
+            // Если `deviceFromMap.container` - это `AndroidContainer`, то у него есть `containerId`.
+            log.debug { "Device or container not found for id $deviceId in isDeviceAlive" }
+            return false
         }
-        val bootAnimCompleted = runBlocking {
+
+        // Выполняем команду для проверки содержимого sdcard/Android
+        val sdcardCheckResult = runBlocking {
             DockerExecAdbBootAnimationCompletedCommand(
-                containerId = container.containerId,
+                containerId = containerId, // Используем containerId
                 adbContainerPath = "${farmConfig.get().androidContainerAdbPath}/adb"
-            ).execute()
+            ).execute() // Возвращает CliCommandResult(success: Boolean, message: String)
         }
-        return sysBootCompleted.success && bootAnimCompleted.success
+
+        // Важно: sdcardCheckResult.success будет почти всегда false из-за анализатора "stopped".
+        // Поэтому мы анализируем sdcardCheckResult.message (необработанный вывод команды).
+        val output = sdcardCheckResult.message
+
+        // Проверяем, содержит ли вывод ожидаемые директории.
+        // Это также неявно проверяет, что команда 'ls' вообще смогла что-то вывести.
+        // Если 'ls' завершится с ошибкой, ее вывод (если он попадет в .message)
+        // вряд ли будет содержать эти строки.
+        val hasExpectedContent = output.contains("data") &&
+                output.contains("media") &&
+                output.contains("obb")
+
+        if (!hasExpectedContent) {
+            log.debug { "Device $deviceId sdcard content check failed. Output: $output" }
+        }
+
+        return hasExpectedContent
     }
 
     override fun getDevices(): List<FarmDevice> = containerMap.values.toList()
