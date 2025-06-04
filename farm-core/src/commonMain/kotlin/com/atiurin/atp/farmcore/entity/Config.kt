@@ -18,7 +18,7 @@ data class Config(
     var deviceNeedToDeleteMonitorDelay: Long = 5_000L,
     var deviceNeedToCreateMonitorDelay: Long = 5_000L,
     var brokenDevicesMonitorDelay: Long = 30_000L,
-    var androidContainerAdbPath: String = "/opt/android/platform-tools",
+    var androidContainerAdbPath: String = "/android/platform-tools",
     var serverAliveTimeoutSec: Long = 30,
     var emulatorParams: String? = null,
     var emulatorEnvironments: MutableMap<String, String> = mutableMapOf(),
