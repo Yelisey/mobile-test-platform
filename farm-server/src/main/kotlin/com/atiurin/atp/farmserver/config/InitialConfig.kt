@@ -10,6 +10,7 @@ data class InitialConfig(
     val deviceBusyTimeoutSec: Long = 30 * 60,
     val isMock: Boolean = false,
     val startPort: Int = 0,
+    val farmMode: String = "MULTIPLE",
     val endPort: Int = 65534,
     val imagesMap: Map<String, String> = mapOf(),
     val androidContainerAdbPath: String? = null,
@@ -17,7 +18,7 @@ data class InitialConfig(
     val emulatorEnvironments: Map<String, String> = mapOf()
 )
 
-fun InitialConfig.toConfig(farmMode: FarmMode = FarmMode.LOCAL) = Config(
+fun InitialConfig.toConfig(farmMode: FarmMode = FarmMode.MULTIPLE) = Config(
     maxDevicesAmount = this.maxDevicesAmount,
     maxDeviceCreationBatchSize = this.maxDeviceCreationBatchSize,
     keepAliveDevicesMap = this.keepAliveDevicesMap.toMutableMap(),

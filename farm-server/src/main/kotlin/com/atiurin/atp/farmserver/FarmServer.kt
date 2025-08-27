@@ -28,6 +28,7 @@ class App: CliktCommand() {
     val deviceBusyTimeoutInSec by option("-dbt", "--device_busy_timeout").long().required()
     val images: Map<String, String> by option("-i", "--img").associate()
     val mockDevice by option("-md", "--mock_device").flag()
+    val farmMode by option("-fm", "--farm_mode")
     val startPortParam by option("-sp", "--start_port").int()
     val endPortParam by option("-ep", "--end_port").int()
     val androidContainerAdbPath by option("-adbp", "--android_container_adb_path")
@@ -55,6 +56,7 @@ class App: CliktCommand() {
             keepAliveDevicesMap = devicesMap.toMutableMap(),
             deviceBusyTimeoutSec = deviceBusyTimeoutInSec,
             isMock = mockDevice,
+            farmMode = farmMode,
             startPort = startPortParam ?: 0,
             endPort = endPortParam ?: 65534,
             imagesMap = images,

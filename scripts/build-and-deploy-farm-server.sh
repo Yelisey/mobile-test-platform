@@ -14,12 +14,12 @@ mv deploy/farm-server-$APP_VERSION deploy/farm-server
 export PATH=$PATH:$(pwd)/deploy/farm-server/bin
 
 # Start the farm-server with specific configuration
-farm-server --max_amount 5 \
+# Start the farm-server with specific configuration
+farm-server --max_amount 7 \
   --start_port 10000 \
   --end_port 11000 \
-  --keep_alive_devices 30=5 \
+  --keep_alive_devices 32=7 \
   --device_busy_timeout 3600 \
-  --img 30=us-docker.pkg.dev/android-emulator-268719/images/30-google-x64:30.1.2 \
-  --emulator_params "-gpu swiftshader_indirect"
+  --img 32=yelisseyoshlokov/android-emulator:5.0 \
 
 

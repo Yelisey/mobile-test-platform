@@ -2,7 +2,7 @@ package com.atiurin.atp.farmcore.entity
 
 
 data class Config(
-    val farmMode: FarmMode = FarmMode.LOCAL,
+    val farmMode: FarmMode = FarmMode.MULTIPLE,
     var maxDevicesAmount: Int = 0,
     var maxDeviceCreationBatchSize: Int = 10,
     var keepAliveDevicesMap: MutableMap<String, Int> = mutableMapOf(),
