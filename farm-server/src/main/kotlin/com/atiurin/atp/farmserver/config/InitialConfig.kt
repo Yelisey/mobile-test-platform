@@ -10,7 +10,7 @@ data class InitialConfig(
     val deviceBusyTimeoutSec: Long = 30 * 60,
     val isMock: Boolean = false,
     val startPort: Int = 0,
-    val farmMode: String = "MULTIPLE",
+    val farmMode: String? = "MULTIPLE",
     val endPort: Int = 65534,
     val imagesMap: Map<String, String> = mapOf(),
     val androidContainerAdbPath: String? = null,
